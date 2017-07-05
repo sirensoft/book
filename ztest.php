@@ -35,7 +35,7 @@
 			})
 		});
 		marker.bindPopup("Hello I'm Marker");
-		marker.addTo(map); 
+		marker.addTo(map); ///
 	</script>
 </body>
 </html>
