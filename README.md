@@ -1,4 +1,4 @@
 ## Book ##
-<p>git commit -m "first commit"
-<p>git push -u origin master
+<p>git commit -m "commit"
+<p>git push  origin master
 <p>
