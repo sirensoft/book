@@ -24,9 +24,9 @@ var point2 = L.point([14.635,100.2347]);
 var distance = point1.distanceTo(point2);
 console.log(distance*100);
 
-
 var latlngs = [[point1.x,point1.y],[point2.x,point2.y]];
 var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
+
 </script>
 </body>
 </html>
