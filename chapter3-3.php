@@ -32,7 +32,6 @@ rectangle.on('click',function(e){
 	console.log(rectangle.getBounds());
 });
 
-map.removeLayer();
 </script>
 </body>
 </html>
