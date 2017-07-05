@@ -20,31 +20,31 @@
 		var marker= L.marker([16.012453, 100.136455],{
 			draggable:true,
 			icon : L.mapbox.marker.icon({
-        	'marker-size': 'large',// small,medium,large   
-        	'marker-symbol':'h',    // a-z
-        	'marker-color': '#00BFFF'// color hex value
-        })
+				'marker-size': 'large', 
+				'marker-symbol':'h',    
+				'marker-color': '#00BFFF'
+			})
 		});
-	marker.bindPopup("Hello I'm Marker");
-	marker.addTo(map); 
+		marker.bindPopup("Hello I'm Marker");
+		marker.addTo(map); 
 
-	var ic_house = L.icon({
-		iconUrl: 'icon/house.png',	
-		iconSize: [40,40],	
-		popupAnchor: [0, -15],
-	});
-	var marker2 = L.marker([16.321456,100.214577],{
-		icon : ic_house
-	}).bindPopup("I'm Marker2.");
-	marker2.addTo(map);
+		var ic_house = L.icon({
+			iconUrl: 'icon/house.png',	
+			iconSize: [40,40],	
+			popupAnchor: [0, -15],
+		});
+		var marker2 = L.marker([16.321456,100.214577],{
+			icon : ic_house
+		}).bindPopup("I'm Marker2.");
+		marker2.addTo(map);
 
-	var marker3 = L.marker([16,100],{
-		draggable :'true'
-	}).addTo(map);
-	marker3.on('dragend',function(e){
-		alert(marker3.getLatLng());
-	});
+		var marker3 = L.marker([16,100],{
+			draggable :'true'
+		}).addTo(map);
+		marker3.on('dragend',function(e){
+			alert(marker3.getLatLng());
+		});
 
-</script>
+	</script>
 </body>
 </html>
