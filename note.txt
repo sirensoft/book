@@ -1,0 +1,13 @@
+﻿title
+description
+marker-size
+marker-symbol
+marker-color
+stroke
+stroke-opacity
+stroke-width
+fill
+fill-opacity
+
+http://map.michelstuyts.be/icons/
+https://www.w3schools.com/colors/colors_names.asp
