@@ -23,7 +23,8 @@ var geojsonPoint =[
 		"properties": {	
 			"marker-color":"#FFFF00",
 			"marker-size":"large",
-			"title":"Hello I'm geojson point."				
+			"marker-symbol":"bus",	
+			"title":"Hello I'm geojson point."	
 		},
 		"geometry": {
 			"type": "Point",
