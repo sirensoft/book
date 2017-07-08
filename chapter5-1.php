@@ -12,32 +12,29 @@
 	</style>
 </head>
 <body>
-	<div id='map'></div>
-	<script>
-		L.mapbox.accessToken = 'pk.eyJ1IjoidGVobm5uIiwiYSI6ImNpZzF4bHV4NDE0dTZ1M200YWxweHR0ZzcifQ.lpRRelYpT0ucv1NN08KUWQ';
-		var map = L.mapbox.map('map', 'mapbox.streets');
-		map.setView([16.00,100.00],6);
-		var point_json = {
-			"type": "FeatureCollection",
-			"features": [
-			{
-				"type": "Feature",
-				"properties": {},
-				"geometry": {
-					"type": "Point",
-					"coordinates": [
-						100.1019287109375,
-						17.308687886770034
-					]
-				}
-			}
-			]
-		};
-	var layer = L.mapbox.featureLayer();
-	layer.setGeoJSON(point_json);
+<div id='map'></div>
+<script>
+L.mapbox.accessToken = 'pk.eyJ1IjoidGVobm5uIiwiYSI6ImNpZzF4bHV4NDE0dTZ1M200YWxweHR0ZzcifQ.lpRRelYpT0ucv1NN08KUWQ';
+var map = L.mapbox.map('map', 'mapbox.streets');
+map.setView([16.00,100.00],6);
+var geojsonPoint =[
+	{
+		"type": "Feature",
+		"properties": {	
+			"marker-color":"#FFFF00",
+			"marker-size":"large",
+			"title":"Hello I'm geojson point."				
+		},
+		"geometry": {
+			"type": "Point",
+			"coordinates": [100.101928,17.308687]
+		}
+	}
+];
+var myLayer = L.mapbox.featureLayer();
+myLayer.setGeoJSON(geojsonPoint).addTo(map);
+</script>
 
-	layer.addTo(map);
-
-	</script>
 </body>
 </html>
+
