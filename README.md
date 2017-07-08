@@ -1,5 +1,4 @@
 ## Book ##
 <p>git add -A
-<p>git commit -m "utehn"
+<p>git commit -m "ok"
 <p>git push  origin master
-<p> By Utehn
