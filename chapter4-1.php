@@ -19,8 +19,13 @@
 	map.setView([16.00,100.00],6);
 	L.control.scale().addTo(map);
 	var point1 = L.point([16.124536,100.6580]);
-	var marker1 = L.marker([16.0124,100.14785],{}).addTo(map);
-	
+	var marker1 = L.marker([16.0124,100.14785]).addTo(map);	
+	var line1 = L.polyline([[16,100],[15,101],[14.9567,99.24358]],{
+		color:'#DC143C',
+		weight: 5,
+		dashArray:5
+	}).addTo(map);
+	line1.bindPopup("I'm line.");
 </script>
 </body>
 </html>
