@@ -5,7 +5,6 @@
 <title>chapter4-1</title>
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 <script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
-
 <link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
 <style>
 	body { margin:0; padding:0; }
@@ -38,6 +37,5 @@
 	var area = (LGeo.area(pol) / 1000000).toFixed(2);
 	pol.bindPopup("Area ="+area+"km<sup>2</sup>");
 </script>
-
 </body>
 </html>
