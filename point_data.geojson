@@ -13,7 +13,7 @@
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {"name":"Point-2","home":"1"},
       "geometry": {
         "type": "Point",
         "coordinates": [100.2557373046875, 16.836089974560213 ]

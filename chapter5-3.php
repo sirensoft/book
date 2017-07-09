@@ -14,13 +14,29 @@
 </head>
 <body>
 	<div id='map'></div>
-		<script>
-			L.mapbox.accessToken = 'pk.eyJ1IjoidGVobm5uIiwiYSI6ImNpZzF4bHV4NDE0dTZ1M200YWxweHR0ZzcifQ.lpRRelYpT0ucv1NN08KUWQ';
-			var map = L.mapbox.map('map', 'mapbox.streets');
-			map.setView([16.00,100.00],6);			
-			var pointLayer = L.mapbox.featureLayer();			
-			pointLayer.loadURL('point_data.geojson').addTo(map);
-		</script>
+	<script>
+L.mapbox.accessToken = 'pk.eyJ1IjoidGVobm5uIiwiYSI6ImNpZzF4bHV4NDE0dTZ1M200YWxweHR0ZzcifQ.lpRRelYpT0ucv1NN08KUWQ';
+var map = L.mapbox.map('map', 'mapbox.streets');
+map.setView([16.00,100.00],6);			
+var pointLayer = L.mapbox.featureLayer();			
+pointLayer.loadURL('point_data.geojson');
+pointLayer.on('ready', function() {			
+pointLayer.eachLayer(function(layer) {				
+if(layer.feature.properties.home==="1"){					
+layer.setIcon(L.mapbox.marker.icon({
+"marker-symbol":"warehouse",
+"marker-color":"#FFA07A"
+}));					
+}
+if(layer.feature.properties.name){
+layer.bindPopup(layer.feature.properties.name);
+}
+});
+map.fitBounds(pointLayer.getBounds());
+});
+pointLayer.addTo(map);
+
+	</script>
 
 </body>
 </html>
