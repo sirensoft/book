@@ -4,7 +4,7 @@
     {
       "type": "Feature",
       "properties": {
-        "title":"Point 1","marker-color":" #FF8C00"
+        "title":"Point 1","marker-color":"#FF8C00"
       },
       "geometry": {
         "type": "Point",
