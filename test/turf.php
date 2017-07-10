@@ -89,15 +89,16 @@
 
 				layer.setIcon(icon);
 
-				var buffered = turf.buffer(layer.feature, 0.32,'kilometers');
+				var buffered = turf.buffer(layer.feature, 0.33,'kilometers');
 
 				L.mapbox.featureLayer(buffered).setStyle({
-					'fillColor':'blue','fillOpacity':0.5
+					'fillColor':'red','fillOpacity':1
 				})	
 				.addTo(map);
-				console.log(layer.feature);
+				//console.log(layer.feature);
 
-				L.circle(layer.getLatLng(),100,{			
+				L.circle(layer.getLatLng(),100,{
+					color:'lime',			
 					fillColor:'lime',
 					fillOpacity:0.4
 				}).addTo(map);
