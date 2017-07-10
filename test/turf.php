@@ -83,22 +83,33 @@
 		});*/
 
 		pointLayer.on('ready', function() {
+			map.fitBounds(pointLayer.getBounds());
 
 			pointLayer.eachLayer(function(layer){
 
 				layer.setIcon(icon);
 
-				var buffered = turf.buffer(layer.feature, 0.1);
+				var buffered = turf.buffer(layer.feature, 0.32,'kilometers');
 
 				L.mapbox.featureLayer(buffered).setStyle({
-					'fillColor':'orange','fillOpacity':0.5
+					'fillColor':'blue','fillOpacity':0.5
 				})	
 				.addTo(map);
 				console.log(layer.feature);
+
+				L.circle(layer.getLatLng(),100,{			
+					fillColor:'lime',
+					fillOpacity:0.4
+				}).addTo(map);
+
 			});
 		});
 
 		L.Control.measureControl().addTo(map);
+
+		
+		
+
 
 
 	</script>
