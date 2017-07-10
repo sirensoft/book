@@ -61,7 +61,7 @@
 		var pointLayer = L.mapbox.featureLayer().addTo(map);			
 		pointLayer.loadURL('../point_data2.geojson');
 		
-		/*
+		
 		pointLayer.on('ready', function() {
 			var features = pointLayer.getGeoJSON();
 			var hull = turf.convex(features);
@@ -80,7 +80,7 @@
 			var centerLayer=L.mapbox.featureLayer(center).addTo(map);
 			console.log(centerLayer.getGeoJSON());
 			
-		});*/
+		});
 
 		pointLayer.on('ready', function() {
 			map.fitBounds(pointLayer.getBounds());
@@ -91,10 +91,12 @@
 
 				var buffered = turf.buffer(layer.feature, 0.33,'kilometers');
 
-				L.mapbox.featureLayer(buffered).setStyle({
+				var bufferFeayureLayer = L.mapbox.featureLayer(buffered);
+				bufferFeayureLayer.setStyle({
 					'fillColor':'red','fillOpacity':1
-				})	
-				.addTo(map);
+				});	
+				bufferFeayureLayer.addTo(map);
+
 				//console.log(layer.feature);
 
 				L.circle(layer.getLatLng(),100,{
