@@ -11,3 +11,5 @@ fill-opacity
 
 http://map.michelstuyts.be/icons/
 https://www.w3schools.com/colors/colors_names.asp
+
+pointLayer.getGeoJSON(); // แปลง feature เป็น GeoJSON
