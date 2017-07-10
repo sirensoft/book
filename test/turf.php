@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset=utf-8 />
-	<title>ZTEST</title>
+	<title>TURF</title>
 	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 	<script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
 	<link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
@@ -19,13 +19,7 @@
 
 		var map = L.mapbox.map('map', 'mapbox.streets');
 		map.setView([16,100],6);
-
-
-		map.on('click', function(e) {
-			L.marker(e.latlng,{
-				draggable:true,	
-			}).addTo(map);
-		});
+		
 		var hullStyle = {
 					fillColor: 'blue',
 					color: 'gray',
