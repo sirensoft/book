@@ -12,6 +12,7 @@
 	</style>
 </head>
 <body>
+	<script src='https://npmcdn.com/@turf/turf/turf.min.js'></script> 
 	<div id='map'></div>
 	<script>
 		L.mapbox.accessToken = 'pk.eyJ1IjoidGVobm5uIiwiYSI6ImNpZzF4bHV4NDE0dTZ1M200YWxweHR0ZzcifQ.lpRRelYpT0ucv1NN08KUWQ';
@@ -25,17 +26,35 @@
 				draggable:true,	
 			}).addTo(map);
 		});
+		var hullStyle = {
+					fillColor: 'blue',
+					color: 'gray',
+					weight: 1
+				};
+		var hullStyleMouse = {
+					fillColor: 'yellow',
+					color: 'gray',
+					weight: 3
+				};
 
-		var marker= L.marker([16.012453, 100.136455],{
-			draggable:true,
-			icon : L.mapbox.marker.icon({
-				'marker-size': 'large',
-				'marker-symbol':'bus',    
-				'marker-color': '#00BFFF'
-			})
-		});
-		marker.bindPopup("Hello I'm Marker");
-		marker.addTo(map);
+		var pointLayer = L.mapbox.featureLayer();			
+		pointLayer.loadURL('point_data.geojson');
+		pointLayer.on('ready', function() {
+			var hull = turf.convex(pointLayer.getGeoJSON());
+			var layerHull = L.mapbox.featureLayer(hull).addTo(map);			
+			layerHull.eachLayer(function(layer){
+				layer.setStyle(hullStyle);
+				layer.on('mouseover',function(e){
+					layer.setStyle(hullStyleMouse);
+				});
+				layer.on('mouseout',function(e){
+					layer.setStyle(hullStyle);
+				});
+			});
+			
+		}).addTo(map);
+
+
 	</script>
 </body>
 </html>

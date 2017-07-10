@@ -34,15 +34,8 @@
 					layer.openPopup();
 				}
 			});
-			var hull = turf.convex(pointLayer.getGeoJSON());
-			L.mapbox.featureLayer(hull).addTo(map);
-
 		});
 		pointLayer.addTo(map);
-		
-
-		
-
 	</script>
 
 </body>
