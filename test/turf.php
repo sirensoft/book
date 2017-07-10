@@ -95,7 +95,7 @@
 				bufferFeayureLayer.setStyle({
 					'fillColor':'red','fillOpacity':1
 				});	
-				bufferFeayureLayer.addTo(map);
+				//bufferFeayureLayer.addTo(map);
 
 				//console.log(layer.feature);
 
@@ -103,15 +103,29 @@
 					color:'lime',			
 					fillColor:'lime',
 					fillOpacity:0.4
+				})
+				//.addTo(map);
+
+				var circle = turf.circle(layer.feature.geometry.coordinates, 0.1,100, 'kilometers', {});
+				L.mapbox.featureLayer(circle).setStyle({
+					fillColor:'yellow'
 				}).addTo(map);
+
+
 
 			});
 		});
 
 		L.Control.measureControl().addTo(map);
 
+
+
+
+
 		
-		
+
+
+
 
 
 
