@@ -1,0 +1,8 @@
+body { margin:0; padding:0; }
+#map { position:absolute; top:0; bottom:0; width:100%; }
+.leaflet-control-draw-measure {
+	background-image: url(../icon/measure-control.png);
+	#background-size:     cover;                     
+	background-repeat:   no-repeat;
+	background-position: center center;
+}

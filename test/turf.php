@@ -4,23 +4,15 @@
 	<meta charset=utf-8 />
 	<title>TURF</title>
 	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
 	<script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
 	<link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
 
 	<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.3/leaflet.draw.js'></script>
 	<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.3/leaflet.draw.css' rel='stylesheet' />
-	
 
-	<style>
-		body { margin:0; padding:0; }
-		#map { position:absolute; top:0; bottom:0; width:100%; }
-		.leaflet-control-draw-measure {
-			background-image: url(../icon/measure-control.png);
-			#background-size:     cover;                     
-			background-repeat:   no-repeat;
-			background-position: center center;
-		}
-	</style>
+	<link rel="stylesheet"  href="../css/style.css" />
+
 </head>
 <body>
 	<script
