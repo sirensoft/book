@@ -35,7 +35,7 @@
 		});
 		var marker2 = L.marker([16.321456,100.214577],{
 			icon : ic_house
-		}).bindPopup("I'm Marker2.");
+		}).bindPopup('<iframe width="280" height="200" src="https://www.youtube.com/embed/UG3dnCauaOY" frameborder="0" allowfullscreen></iframe>');
 		marker2.addTo(map);
 
 		var marker3 = L.marker([16,100],{
