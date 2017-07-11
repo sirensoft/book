@@ -38,7 +38,7 @@
 		L.mapbox.featureLayer().loadURL('http://localhost:3000/point').addTo(map);
 		L.mapbox.featureLayer().loadURL('http://localhost:3000/file')
 		.on('ready',function(){
-			this.setStyle({'fillColor':'blue'});
+			this.setStyle({'fillColor':'#0000CD'});
 		})
 		.addTo(map);
 

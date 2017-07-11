@@ -23,7 +23,7 @@ var geoJson = {
     },
     {
       "type": "Feature",
-      "properties": {"name":"Point-2","home":"1"},
+      "properties": {"name":"Point-2","home":"1","marker-color":"#DC143C"},
       "geometry": {
         "type": "Point",
         "coordinates": [100.2557373046875, 16.836089974560213 ]
@@ -31,7 +31,7 @@ var geoJson = {
     },
     {
       "type": "Feature",
-      "properties": {"title":"หมุด 3","marker-color":"#7CFC00"},
+      "properties": {"title":"หมุด 3","marker-color":"#0000FF"},
       "geometry": {
         "type": "Point",
         "coordinates": [99.5855712890625, 16.536164463838773 ]
@@ -39,7 +39,7 @@ var geoJson = {
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {"marker-color":"#7CFC00"},
       "geometry": {
         "type": "Point",
         "coordinates": [100.2886962890625, 16.50456606887792 ]
@@ -47,7 +47,7 @@ var geoJson = {
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {"marker-color":"#DC143C"},
       "geometry": {
         "type": "Point",
         "coordinates": [99.4976806640625, 17.214264312027566 ]
@@ -73,7 +73,10 @@ app.get('/file',function(req,res){
 	
 	res.json(obj)
 })
+
+app.get('in',function(req,res){
   
+});
 
 
 app.listen(3000, function () {
