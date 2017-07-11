@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset=utf-8 />
-	<title>set test</title>
+	<title>within-1</title>
 	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
 	<script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
@@ -102,15 +102,15 @@
 
 				var circleJson = turf.circle([100,17], 60,100, 'kilometers', {});
 				geoJsonTemp.features[0]=circleJson;
-				L.mapbox.featureLayer(geoJsonTemp)
+				var circleJsonLayer = L.mapbox.featureLayer(geoJsonTemp)
 				.addTo(map);
 				
 				console.log(geoJsonTemp);
 				
 				var resGeojson = turf.within(geoJsonPoint,geoJsonTemp);
 				console.log(resGeojson);
-				var bound = L.mapbox.featureLayer(resGeojson).addTo(map).getBounds();
-				map.fitBounds(bound);
+				L.mapbox.featureLayer(resGeojson).addTo(map);
+				map.fitBounds(circleJsonLayer.getBounds());
 
 
 			});
