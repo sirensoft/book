@@ -109,7 +109,9 @@
 				
 				var resGeojson = turf.within(geoJsonPoint,geoJsonTemp);
 				console.log(resGeojson);
-				L.mapbox.featureLayer(resGeojson).addTo(map);
+				var bound = L.mapbox.featureLayer(resGeojson).addTo(map).getBounds();
+				map.fitBounds(bound);
+
 
 			});
 
