@@ -34,25 +34,90 @@
 		//var hash = L.hash(map);
 
 		var geoJsonPoint;
-		var geoJsonPol;
+		var geoJsonPol= {
+			"type": "FeatureCollection",
+			"features": [
+			{
+				"type": "Feature",
+				"properties": {},
+				"geometry": {
+					"type": "Polygon",
+					"coordinates": [
+					[
+					[
+					99.832763671875,
+					16.58618467276904
+					],
+					[
+					100.36834716796875,
+					16.391296140878225
+					],
+					[
+					100.5743408203125,
+					16.551961721972525
+					],
+					[
+					100.711669921875,
+					16.87814699473217
+					],
+					[
+					100.50018310546875,
+					17.17228278169308
+					],
+					[
+					100.10467529296875,
+					17.159161602658134
+					],
+					[
+					99.90966796875,
+					16.954351461203945
+					],
+					[
+					99.832763671875,
+					16.58618467276904
+					]
+					]
+					]
+				}
+			}
+			]};
 
-		var pointFeatureLayer = L.mapbox.featureLayer();
-		pointFeatureLayer.loadURL('../point_data2.geojson').on('ready',function(){
-			geoJsonPoint = pointFeatureLayer.getGeoJSON();
-		});
-		
-		var polFeatureLayer = L.mapbox.featureLayer();
-		polFeatureLayer.loadURL('../polygon_data.geojson').on('ready',function(){
-			geoJsonPol = pointFeatureLayer.getGeoJSON();
+			var geoJsonTemp= {
+				"type": "FeatureCollection",
+				"features": []
+			};
+
+			L.mapbox.featureLayer(geoJsonPol)
+			//.addTo(map);
+
+			var pointFeatureLayer = L.mapbox.featureLayer()
+			//.addTo(map);
+			pointFeatureLayer.loadURL('../point_data2.geojson').on('ready',function(){
+				geoJsonPoint = pointFeatureLayer.getGeoJSON();
+				console.log(geoJsonPoint);
+				var resGeojson = turf.within(geoJsonPoint, geoJsonPol);
+				console.log(resGeojson);
+
+				
+
+				var circleJson = turf.circle([100,17], 60,100, 'kilometers', {});
+				geoJsonTemp.features[0]=circleJson;
+				L.mapbox.featureLayer(geoJsonTemp)
+				.addTo(map);
+				
+				console.log(geoJsonTemp);
+				
+				var resGeojson = turf.within(geoJsonPoint,geoJsonTemp);
+				console.log(resGeojson);
+				L.mapbox.featureLayer(resGeojson).addTo(map);
+
+			});
+
 			
-			var resGeojson = turf.within(geoJsonPoint, geoJsonPol);
-		});;
-
-		
 
 
 
 
-	</script>
-</body>
-</html>
+		</script>
+	</body>
+	</html>
