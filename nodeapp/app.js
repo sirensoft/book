@@ -3,10 +3,10 @@ var cors = require('cors')
 var app = express()
 app.use(cors())
 
-// Import your module of interest after you've installed your module
+
 var turf = require('turf');
 
-
+var obj = require('./pol_data');
 
 var geoJson = {
   "type": "FeatureCollection",
@@ -31,7 +31,7 @@ var geoJson = {
     },
     {
       "type": "Feature",
-      "properties": {"title":"Point 3","marker-color":"#7CFC00"},
+      "properties": {"title":"หมุด 3","marker-color":"#7CFC00"},
       "geometry": {
         "type": "Point",
         "coordinates": [99.5855712890625, 16.536164463838773 ]
@@ -67,6 +67,11 @@ app.get('/geo', function (req, res) {
 app.get('/point',function(req,res){
 	var point = turf.point([100, 16.1984])
 	res.json(point)
+})
+
+app.get('/file',function(req,res){
+	
+	res.json(obj)
 })
   
 

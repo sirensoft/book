@@ -36,6 +36,11 @@
 		L.mapbox.featureLayer().loadURL('http://localhost:3000/geo').addTo(map);
 
 		L.mapbox.featureLayer().loadURL('http://localhost:3000/point').addTo(map);
+		L.mapbox.featureLayer().loadURL('http://localhost:3000/file')
+		.on('ready',function(){
+			this.setStyle({'fillColor':'blue'});
+		})
+		.addTo(map);
 
 
 	</script>
