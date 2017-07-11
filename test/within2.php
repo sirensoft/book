@@ -30,20 +30,33 @@
 		var base1 = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
 			maxZoom: 20,
 			subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-		})
-		.addTo(map);
+		});
+		var base2 = L.mapbox.tileLayer('mapbox.streets');
+
+		var oly_res = L.featureGroup();
 
 		var polyFeatures  = L.mapbox.featureLayer();
 		var pointFeatures = L.mapbox.featureLayer();
-		
+
 		pointFeatures.loadURL('../point_data2.geojson').on('ready',function(){	
-			
-			polyFeatures.loadURL('../pol_data.geojson').on('ready',function(){				
+
+			polyFeatures.loadURL('../pol_data.geojson').on('ready',function(){	
+				polyFeatures.setStyle({fillColor:'red',fillOpacity: 0.35,weight: 2,color:'blue'});	
+
 				var resGeojson = turf.within(pointFeatures.getGeoJSON(), polyFeatures.getGeoJSON());	
-				var b =L.mapbox.featureLayer(resGeojson).addTo(map).getBounds();
-				map.fitBounds(b);
+				L.mapbox.featureLayer(resGeojson).addTo(oly_res);
+				map.fitBounds(polyFeatures.getBounds());
+				
 			});
+
 		});
+		L.control.layers({
+			'base1':base1,
+			'base2':base2.addTo(map)
+		},{
+			'point':oly_res.addTo(map),
+			'poly':polyFeatures.addTo(map)
+		}).addTo(map);
 
 
 	</script>

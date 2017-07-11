@@ -1,4 +1,5 @@
-﻿title
+﻿#geojson properties
+title
 description
 marker-size
 marker-symbol
@@ -9,7 +10,17 @@ stroke-width
 fill
 fill-opacity
 
+#setStyle
+weight: 2,
+opacity: 1,
+color: 'white',
+dashArray: '3',
+fillOpacity: 0.3,
+fillColor: '#ff0000'
+
+#web
 http://map.michelstuyts.be/icons/
 https://www.w3schools.com/colors/colors_names.asp
 
+#method
 pointLayer.getGeoJSON(); // แปลง feature เป็น GeoJSON
