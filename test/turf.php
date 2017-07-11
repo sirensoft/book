@@ -15,14 +15,10 @@
 
 </head>
 <body>
-	<script
-	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	<script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>  
 	<script src="https://unpkg.com/leaflet.measurecontrol@1.0.0"></script>
-
-
-
-
+	
 	<div id='map'></div>
 	<script>
 		L.mapbox.accessToken = 'pk.eyJ1IjoidGVobm5uIiwiYSI6ImNpZzF4bHV4NDE0dTZ1M200YWxweHR0ZzcifQ.lpRRelYpT0ucv1NN08KUWQ';
@@ -47,7 +43,7 @@
 		var icon = L.mapbox.marker.icon({
 			'marker-size': 'small', 
 			'marker-symbol':'h',    
-			'marker-color': '#00FF00'
+			'marker-color': '#DC143C'
 		});
 
 		var pointLayer = L.mapbox.featureLayer().addTo(map);			
@@ -57,7 +53,8 @@
 		pointLayer.on('ready', function() {
 			var features = pointLayer.getGeoJSON();
 			var hull = turf.convex(features);
-			var layerHull = L.mapbox.featureLayer(hull).addTo(map);			
+			var layerHull = L.mapbox.featureLayer(hull)
+			//.addTo(map);			
 			layerHull.eachLayer(function(layer){
 				layer.setStyle(hullStyle);
 				layer.on('mouseover',function(e){
@@ -68,19 +65,18 @@
 				});
 			});
 			var center = turf.center(features);
-			console.log(center);
-			var centerLayer=L.mapbox.featureLayer(center).addTo(map);
-			console.log(centerLayer.getGeoJSON());
+			//console.log(center);
+			var centerLayer=L.mapbox.featureLayer(center)
+			//.addTo(map);
+			//console.log(centerLayer.getGeoJSON());
 			
 		});
 
 		pointLayer.on('ready', function() {
 			map.fitBounds(pointLayer.getBounds());
-
-			pointLayer.eachLayer(function(layer){
+			pointLayer.eachLayer(function(layer){	
 
 				layer.setIcon(icon);
-
 				var buffered = turf.buffer(layer.feature, 0.33,'kilometers');
 
 				var bufferFeayureLayer = L.mapbox.featureLayer(buffered);
@@ -88,9 +84,7 @@
 					'fillColor':'red','fillOpacity':1
 				});	
 				//bufferFeayureLayer.addTo(map);
-
 				//console.log(layer.feature);
-
 				L.circle(layer.getLatLng(),100,{
 					color:'lime',			
 					fillColor:'lime',
@@ -98,15 +92,19 @@
 				})
 				//.addTo(map);
 
-				var circle = turf.circle(layer.feature.geometry.coordinates, 0.1,100, 'kilometers', {});
+				var rand = Math.floor(Math.random() * 3) ;
+				console.log(rand);
+				var circle = turf.circle(layer.feature.geometry.coordinates, 30,100, 'kilometers', {});
 				L.mapbox.featureLayer(circle).setStyle({
-					fillColor:'yellow'
-				}).addTo(map);
-
-
+					fillColor:getColor(rand)
+				}).addTo(map);		
 
 			});
 		});
+		var getColor = function(i){
+			var color = ['lime','orange','blue'];
+			return color[i];
+		};
 
 		L.Control.measureControl().addTo(map);
 
