@@ -26,11 +26,8 @@
 		
 		var map = L.mapbox.map('map' );
 		map.setView([15.464,101.129],8);
-
 		
-		var base2 = L.mapbox.tileLayer('mapbox.streets').addTo(map);
-
-		
+		var base2 = L.mapbox.tileLayer('mapbox.streets').addTo(map);	
 
 		
 		L.mapbox.featureLayer().loadURL('http://localhost:3000/geo').addTo(map);
