@@ -6,7 +6,7 @@ app.use(cors())
 
 var turf = require('turf');
 
-var obj = require('./pol_data');
+var obj = require('./data/pol_data');
 
 var geoJson = {
   "type": "FeatureCollection",
@@ -74,11 +74,13 @@ app.get('/file',function(req,res){
 	res.json(obj)
 })
 
-app.get('in',function(req,res){
-  
-});
 
 
+
+
+
+
+/// end
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })
