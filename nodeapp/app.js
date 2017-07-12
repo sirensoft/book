@@ -75,7 +75,14 @@ app.get('/file',function(req,res){
 })
 
 
+//test
 
+app.get('/test1',function(req,res){
+	var json = {"cid":114477,"name":"อุเทน"};
+	res.json(json)
+});
+
+//end test
 
 
 
