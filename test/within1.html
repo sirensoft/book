@@ -94,21 +94,26 @@
 			//.addTo(map);
 			pointFeatureLayer.loadURL('../point_data2.geojson').on('ready',function(){
 				geoJsonPoint = pointFeatureLayer.getGeoJSON();
-				console.log(geoJsonPoint);
+				//console.log(geoJsonPoint);
 				var resGeojson = turf.within(geoJsonPoint, geoJsonPol);
-				console.log(resGeojson);
+				//console.log(resGeojson);
 
 				
 
 				var circleJson = turf.circle([100,17], 60,100, 'kilometers', {});
+				//console.log(circleJson);
 				geoJsonTemp.features[0]=circleJson;
-				var circleJsonLayer = L.mapbox.featureLayer(geoJsonTemp)
+				console.log(geoJsonTemp);
+
+				var collectionTemp = turf.featureCollection([circleJson]);
+				console.log(collectionTemp);
+				var circleJsonLayer = L.mapbox.featureLayer(collectionTemp)
 				.addTo(map);
 				
-				console.log(geoJsonTemp);
+				
 				
 				var resGeojson = turf.within(geoJsonPoint,geoJsonTemp);
-				console.log(resGeojson);
+				//console.log(resGeojson);
 				L.mapbox.featureLayer(resGeojson).addTo(map);
 				map.fitBounds(circleJsonLayer.getBounds());
 

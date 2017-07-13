@@ -141,6 +141,10 @@
 			"circleFeatureLayerGroup":circleFeatureLayerGroup
 		}).addTo(map);
 
+		L.mapbox.featureLayer().loadURL('http://localhost:3000/test2').on('ready',function(){
+			this.setStyle({'fillColor':'green','color':'blue'});
+		}).addTo(map);
+
 
 	</script>
 </body>
