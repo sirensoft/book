@@ -144,6 +144,10 @@ var against = {
  
 });
 
+app.get('/map/:id',function(req,res){
+  res.send(req.params.id)  
+});
+
 //end test
 
 
