@@ -32,7 +32,11 @@
 		
 		L.mapbox.featureLayer().loadURL('http://localhost:3000/geo').addTo(map);
 
-		L.mapbox.featureLayer().loadURL('http://localhost:3000/point').addTo(map);
+		var pointLayer =L.mapbox.featureLayer().loadURL('http://localhost:3000/point').addTo(map);
+		pointLayer.on('ready',function(){
+			map.fitBounds(pointLayer.getBounds());
+		})
+
 		L.mapbox.featureLayer().loadURL('http://localhost:3000/file')
 		.on('ready',function(){
 			this.setStyle({'fillColor':'#0000CD'});
