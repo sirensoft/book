@@ -8,7 +8,7 @@ app.use(cors())
 app.use(morgan())
 
 
-var obj = require('./data/house');
+var jsonFile = require('./data/house');
 
 var connection = mysql.createConnection({
 	host: 'localhost',
@@ -26,16 +26,16 @@ connection.connect(function(err) {
 	else {
 		
 		
-		connection.query("truncate data_json",function(err,result){
+		connection.query("truncate point",function(err,result){
 			if(err) throw err;
 		});
-		obj.features.forEach(function(feature){
-       			
-       		var coords = JSON.stringify(feature.geometry.coordinates);
-       		var values  = {title: feature.properties.title,coordinates:coords};
-       		
 
-       		connection.query("INSERT into data_json  SET ?",values);
+		jsonFile.features.forEach(function(feature){
+
+			var coords = JSON.stringify(feature.geometry.coordinates);
+			var row_insert  = {title: feature.properties.title,coordinates:coords};
+
+			connection.query("INSERT into point  SET ?",row_insert);
 
        	}); // end loop
 		
@@ -44,31 +44,28 @@ connection.connect(function(err) {
 
 app.get('/point',function(req,res){
 
-	var data = [];
-	connection.query("SELECT id,title,coordinates FROM data_json", function (err, result, fields) {
-    if (err) throw err;
-   
-   		result.forEach(function(feature){
-   			data.push({ 
-  				"type": "Feature", 
-  				"properties": { "title":feature.title,"marker-symbol":"warehouse"}, 
-  				"geometry": { "type": "Point", "coordinates": JSON.parse(feature.coordinates) } 
-  			})
-   		});
-   		res.json(data)
-  	});
+	var FeatureCollection =  {
+		"type": "FeatureCollection",
+		"name": "house",
+		"features":[]
+	};
 
-  
-  	
-
-  
 	
+	connection.query("SELECT id,title,coordinates FROM point", function (err, result, fields) {
+		if (err) throw err;
+
+		result.forEach(function(row){
+			FeatureCollection.features.push({ 
+				"type": "Feature", 
+				"properties": { "title":row.title+"ok","marker-symbol":"warehouse"}, 
+				"geometry": { "type": "Point", "coordinates": JSON.parse(row.coordinates) } 
+			})
+		});//end Loop
+		res.json(FeatureCollection);
+	});
 
 });
-
-
-
 /// end
 app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
+	console.log('Example app listening on port 3000!')
 })
