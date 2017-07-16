@@ -99,7 +99,7 @@
 			'ถนน':streets.addTo(map),
 			'google':googleHybrid
 		},{
-			'node1':pointLayer.addTo(map)
+			'house':pointLayer.addTo(map)
 		}).addTo(map);
 
 		/*map.on('click',function(e){
@@ -121,6 +121,19 @@
 
 		});*/
 
+		map.on('overlayadd', function(layer){
+			console.log('add -'+layer.name)
+			if(layer.name==='house'){
+				labelLayer.addTo(map)
+			}
+		});
+
+		map.on('overlayremove', function(layer){
+			console.log('remove -'+ layer.name)
+			if(layer.name==='house'){
+				labelLayer.remove();
+			}
+		});
 
 
 	</script>
