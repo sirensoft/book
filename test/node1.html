@@ -51,7 +51,8 @@
 			marker.on('dragend',function(e){
 				//var marker = e.target;
 				var drop = e.target.getLatLng();
-				//alert(drop)
+				
+				
 
 				var point = {"type": "Feature", "geometry": { "type": "Point", "coordinates":[] } };
 				point.geometry.coordinates[0]=drop.lng;
