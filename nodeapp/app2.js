@@ -7,6 +7,8 @@ var app = express()
 app.use(cors())
 app.use(morgan())
 
+app.use(express.static('html'))
+
  bodyParser = require('body-parser'),
 
 app.use(bodyParser.urlencoded({

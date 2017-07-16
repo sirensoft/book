@@ -42,7 +42,8 @@
 		var marker = L.marker([16.8358, 100.37569],{'draggable':true}).addTo(map);
 
 		
-		L.mapbox.featureLayer().loadURL('http://localhost:3000/geo').addTo(map);
+		//L.mapbox.featureLayer().loadURL('http://localhost:3000/geo').addTo(map);
+
 		var orgin ;
 		var pointLayer =L.mapbox.featureLayer().loadURL('http://localhost:3000/point');
 		pointLayer.on('ready',function(){
@@ -77,13 +78,13 @@
 			});
 
 		})
-
+/*
 		L.mapbox.featureLayer().loadURL('http://localhost:3000/file')
 		.on('ready',function(){
 			this.setStyle({'fillColor':'#0000CD'});
 		})
 		.addTo(map);
-
+*/
 		L.control.layers({
 			'ถนน':streets.addTo(map),
 			'google':googleHybrid
