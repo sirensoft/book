@@ -4,6 +4,7 @@ var morgan = require('morgan')
 var app = express()
 app.use(cors())
 app.use(morgan())
+app.use(express.static('html'))
 
 
 var turf = require('@turf/turf');
