@@ -43,22 +43,22 @@
 
 		
 		L.mapbox.featureLayer().loadURL('http://localhost:3000/geo').addTo(map);
-
+		var orgin ;
 		var pointLayer =L.mapbox.featureLayer().loadURL('http://localhost:3000/point');
 		pointLayer.on('ready',function(){
 			map.fitBounds(pointLayer.getBounds());
+			
 
 			marker.on('dragend',function(e){
 				//var marker = e.target;
-				var drop = e.target.getLatLng();
-				
+				var drop = e.target.getLatLng();				
 				
 
 				var point = {"type": "Feature", "geometry": { "type": "Point", "coordinates":[] } };
 				point.geometry.coordinates[0]=drop.lng;
 				point.geometry.coordinates[1]=drop.lat;
 				
-				var against = pointLayer.getGeoJSON();
+				var against =  pointLayer.getGeoJSON();
 				var nearest = turf.nearest(point, against);
 				var distance = turf.distance(point,nearest);
 
@@ -66,8 +66,10 @@
 				nearest.properties['marker-size']='large';
 				nearest.properties['title']='ใกล้ที่สุด';
 				nearest.properties['description']= distance*1000;
+
+				pointLayer.setGeoJSON(against)
 				
-				pointLayer.setGeoJSON(against);		
+				
 				
 			});
 

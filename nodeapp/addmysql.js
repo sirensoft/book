@@ -57,7 +57,12 @@ app.get('/point',function(req,res){
 		result.forEach(function(row){
 			FeatureCollection.features.push({ 
 				"type": "Feature", 
-				"properties": { "title":row.title+"ok","marker-symbol":"warehouse","marker-color":"#7CFC00","marker-size":"small"}, 
+				"properties": { 
+					"title":row.title+"ok",
+					"marker-symbol":"warehouse",
+					"marker-color":"#7CFC00",
+					"marker-size":"small"
+				}, 
 				"geometry": { "type": "Point", "coordinates": JSON.parse(row.coordinates) } 
 			})
 		});//end Loop
