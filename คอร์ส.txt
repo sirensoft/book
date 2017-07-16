@@ -1,0 +1,23 @@
+﻿## GIS Programming ด้วยภาษา Javascript ##
+1) การจัดการข้อมูล GIS ด้วยโปรแกรม QGIS เบื้องต้น
+- การติดตั้ง plugin
+- การเรียก base map เช่น google , open street map 
+- การสร้าง แก้ไข  ลบ  และเรียกดูข้อมูล GIS
+- การแปลงข้อมูลเป็น GeoJSON
+
+2) การเขียนโปรแกรม GIS บนฝั่ง client ด้วย  javascript
+- การเขียน Javascript เพื่อแสดงผลแผนที่
+- การกำหนดแผนที่ฐาน (Base map) และตัวควบคุมแผนที่ต่างๆ (map control)
+- การซ้อนชั้นข้อมูลแบบ point  , line และ Polygon
+
+3) การเขียนโปรแกรม GIS บนฝั่ง server ด้วย Node.js และ Mysql (หรือ Mongodb)
+- การใช้ node.js เป็น backend process
+
+4) ตัวอย่างระบบงาน GIS
+- workshop การซ้อนทับข้อมูล point line และ polygon และทำ classify
+- workshop การค้นหาหลังคาเรือน ในรัศมีวงกลม (circle)
+- workshop การค้นหาหลังคาเรือนในพื้นที่ปิด(polygon)
+- workshop การค้นหา point สถานที่ที่ใกล้ที่สุด
+- workshop การทำ geofencing เตือนเมื่อเข้า-ออกพื้นที่
+- workshop การ insert ข้อมูล GIS ที่ลงใน database
+

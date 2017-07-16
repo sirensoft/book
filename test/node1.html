@@ -48,7 +48,7 @@
 		pointLayer.on('ready',function(){
 			map.fitBounds(pointLayer.getBounds());
 			
-
+			var circle ;
 			marker.on('dragend',function(e){
 				//var marker = e.target;
 				var drop = e.target.getLatLng();				
@@ -57,6 +57,9 @@
 				var point = {"type": "Feature", "geometry": { "type": "Point", "coordinates":[] } };
 				point.geometry.coordinates[0]=drop.lng;
 				point.geometry.coordinates[1]=drop.lat;
+				circle =L.circle([drop.lat,drop.lng],100);
+				map.addLayer(circle);
+				//console.log(circle);
 				
 				var against =  pointLayer.getGeoJSON();
 				var nearest = turf.nearest(point, against);
