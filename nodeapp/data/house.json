@@ -3,7 +3,7 @@
 "name": "house",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 "features": [
-{ "type": "Feature", "properties": { "title":"xxxxx"}, "geometry": { "type": "Point", "coordinates": [ 100.373486, 16.836126 ] } },
+{ "type": "Feature", "properties": { "title":"อุเทน"}, "geometry": { "type": "Point", "coordinates": [ 100.373486, 16.836126 ] } },
 { "type": "Feature", "properties": { }, "geometry": { "type": "Point", "coordinates": [ 100.373968, 16.836193 ] } },
 { "type": "Feature", "properties": { }, "geometry": { "type": "Point", "coordinates": [ 100.374496, 16.835554 ] } },
 { "type": "Feature", "properties": {"title":"aaaaa" }, "geometry": { "type": "Point", "coordinates": [ 100.373921, 16.835665 ] } },

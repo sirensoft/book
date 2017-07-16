@@ -12,6 +12,9 @@
 	<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.3/leaflet.draw.css' rel='stylesheet' />
 
 	<link rel="stylesheet"  href="../css/style.css" />
+	<style>
+		.point-label { background:null; white-space: nowrap;}
+	</style>
 
 </head>
 <body>
@@ -40,7 +43,7 @@
 		});
 
 		var marker = L.marker([16.8358, 100.37569],{'draggable':true}).addTo(map);
-
+		var labelLayer = L.featureGroup().addTo(map);
 		
 		//L.mapbox.featureLayer().loadURL('http://localhost:3000/geo').addTo(map);
 
@@ -48,6 +51,13 @@
 		var pointLayer =L.mapbox.featureLayer().loadURL('http://localhost:3000/point');
 		pointLayer.on('ready',function(){
 			map.fitBounds(pointLayer.getBounds());
+
+			pointLayer.eachLayer(function(layer){
+          		var coords = layer.feature.geometry.coordinates;
+          		L.marker([coords[1],coords[0]], 
+          			{icon:L.divIcon({className:'point-label', html:layer.feature.properties.title})}
+          		).addTo(labelLayer)
+       		 });
 			
 			var circle ;
 			marker.on('dragend',function(e){

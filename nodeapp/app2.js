@@ -36,14 +36,17 @@ connection.query("truncate point",function(err,result){
 	if(err) throw err;
 });
 
+var row_insert =[];
 jsonFile.features.forEach(function(feature){
 
 	var coords = JSON.stringify(feature.geometry.coordinates);
-	var row_insert  = {title: feature.properties.title,coordinates:coords};
-
-	connection.query("INSERT into point  SET ?",row_insert);
+	//var row_insert ={title: feature.properties.title,coordinates:coords};
+	//connection.query("INSERT into point set  ?",row_insert);
+	row_insert.push([feature.properties.title,coords])
+	
 
  }); // end loop
+connection.query("INSERT into point  (title,coordinates) values ?",[row_insert]);
 
 
 app.get('/point',function(req,res){
@@ -60,7 +63,7 @@ app.get('/point',function(req,res){
 			FeatureCollection.features.push({ 
 				"type": "Feature", 
 				"properties": { 
-					"title":row.title+"ok",
+					"title":row.title,
 					"marker-symbol":"warehouse",
 					"marker-color":"#7CFC00",
 					"marker-size":"small"
