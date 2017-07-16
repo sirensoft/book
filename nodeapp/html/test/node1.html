@@ -99,7 +99,8 @@
 			'ถนน':streets.addTo(map),
 			'google':googleHybrid
 		},{
-			'house':pointLayer.addTo(map)
+			'house':pointLayer.addTo(map),
+			'marker':marker
 		}).addTo(map);
 
 		/*map.on('click',function(e){
@@ -120,6 +121,7 @@
                     });
 
 		});*/
+
 
 		map.on('overlayadd', function(layer){
 			console.log('add -'+layer.name)
