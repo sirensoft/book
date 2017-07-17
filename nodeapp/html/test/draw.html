@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset=utf-8 />
-  <title>Leaflet Draw</title>
+  <title>GIS Analysis</title>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   <script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
   <link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
@@ -41,7 +41,7 @@
       }
     }).addTo(map);
 
-    map.on(L.Draw.Event.CREATED, function(e) {
+    map.on('draw:created', function(e) {
       featureGroup.addLayer(e.layer);
       console.log(e.layerType)
 
@@ -79,6 +79,14 @@
     
 
     });
+
+    $('.leaflet-draw-edit-remove').click(function(){
+      alert()
+    });
+
+
+
+
   </script>
 </body>
 </html>

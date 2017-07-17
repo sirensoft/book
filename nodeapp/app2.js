@@ -135,15 +135,15 @@ bodyParser = require('body-parser'),
  		"features":[]
  	};
 
- 	connection.query("SELECT id,title,coordinates FROM point", function (err, result, fields) {
+ 	connection.query("SELECT id,title,dis,coordinates FROM house", function (err, result, fields) {
  		if (err) throw err;
  		result.forEach(function(row){
  			points.features.push({ 
  				"type": "Feature", 
  				"properties": { 
  					"title":row.title,
- 					"marker-symbol":"warehouse",
- 					"marker-color":"#A52A2A",
+ 					"marker-symbol":row.dis==1?"disability":"warehouse",
+ 					"marker-color":row.dis==1?"#B22222":"#7CFC00",
  					"marker-size":"large"
  				}, 
  				"geometry": { "type": "Point", "coordinates": JSON.parse(row.coordinates) } 
@@ -151,6 +151,7 @@ bodyParser = require('body-parser'),
 		});//end Loop
 
 		var data = turf.within(points, polygon);
+		console.log(data.features)
 
  		res.json(data);
  		

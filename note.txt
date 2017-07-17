@@ -18,7 +18,7 @@ dashArray: '3',
 fillOpacity: 0.3,
 fillColor: '#ff0000'
 
-#web
+#web and icon
 http://map.michelstuyts.be/icons/
 https://www.w3schools.com/colors/colors_names.asp
 
