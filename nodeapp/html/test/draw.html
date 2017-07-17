@@ -37,19 +37,22 @@
     map.on('draw:created', function(e) {
       featureGroup.addLayer(e.layer);
       console.log(e.layerType)
+      if(e.layerType === 'polyline') return;
+       if(e.layerType === 'marker') return;
+
       var data = featureGroup.toGeoJSON();
       data = data.features[data.features.length-1];      
       
-      data=JSON.stringify(data)
-      //console.log(data)
+     
+     
       $.ajax({
         type: 'POST',
         url: 'http://localhost:3000/json',
-        data: data,
+        data: JSON.stringify(data),
         contentType: "application/json; charset=utf-8",
         dataType: "json"
       }).done(function(data){
-        console.log(data)
+        
         L.mapbox.featureLayer(data).addTo(map)
 
       });
