@@ -1,45 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset=utf-8 />
-<title>Leaflet Draw</title>
-<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-<script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
-<link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
+  <meta charset=utf-8 />
+  <title>Leaflet Draw</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
+  <link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
 
-<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.4.10/leaflet.draw.css' rel='stylesheet' />
-<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.4.10/leaflet.draw.js'></script>
+  <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.4.10/leaflet.draw.css' rel='stylesheet' />
+  <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.4.10/leaflet.draw.js'></script>
 
-<style>
-  body { margin:0; padding:0; }
-  #map { position:absolute; top:0; bottom:0; width:100%; }
-</style>
+  <style>
+    body { margin:0; padding:0; }
+    #map { position:absolute; top:0; bottom:0; width:100%; }
+  </style>
 </head>
 <body>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <div id='map'></div>
 
-<div id='map'></div>
+  <script>
+    L.mapbox.accessToken = 'pk.eyJ1IjoidGVobm5uIiwiYSI6ImNpZzF4bHV4NDE0dTZ1M200YWxweHR0ZzcifQ.lpRRelYpT0ucv1NN08KUWQ';
+    var map = L.mapbox.map('map', 'mapbox.streets')
+    .setView([16, 100], 12);
 
-<script>
-L.mapbox.accessToken = 'pk.eyJ1IjoidGVobm5uIiwiYSI6ImNpZzF4bHV4NDE0dTZ1M200YWxweHR0ZzcifQ.lpRRelYpT0ucv1NN08KUWQ';
-  var map = L.mapbox.map('map', 'mapbox.streets')
-      .setView([16, 100], 12);
+    var featureGroup = L.featureGroup().addTo(map);
 
-  var featureGroup = L.featureGroup().addTo(map);
-  
 
-  
-  var drawControl = new L.Control.Draw({
-    edit: {
-      featureGroup: featureGroup
-    }
-  }).addTo(map);
 
-  map.on('draw:created', function(e) {
+    var drawControl = new L.Control.Draw({
+      edit: {
+        featureGroup: featureGroup
+      }
+    }).addTo(map);
+
+    map.on('draw:created', function(e) {
       featureGroup.addLayer(e.layer);
       var data = featureGroup.toGeoJSON();
-      //var data = JSON.stringify(data)
-      console.log(data.features[data.features.length-1])
-  });
-</script>
+      data = data.features[data.features.length-1];      
+      
+      data=JSON.stringify(data)
+      //console.log(data)
+      $.ajax({
+        type: 'POST',
+        url: 'http://localhost:3000/json',
+        data: data,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+      }).done(function(data){
+        console.log(data)
+        L.mapbox.featureLayer(data).addTo(map)
+
+      });
+
+    
+
+    });
+  </script>
 </body>
 </html>

@@ -2,10 +2,11 @@ var express = require('express')
 var cors = require('cors')
 var morgan = require('morgan')
 var mysql = require('mysql');
+var turf = require('@turf/turf');
 
 var app = express()
 app.use(cors())
-app.use(morgan())
+//app.use(morgan())
 
 app.use(express.static('html'))
 
@@ -126,7 +127,12 @@ app.use(bodyParser.urlencoded());
  });
 
  app.post('/json',function(req,res){
+ 	var data = req.body;
+ 	console.log(data);
 
+ 	var data = turf.centroid(data);
+
+ 	res.json(data);
  })
 
 /// end
