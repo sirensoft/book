@@ -36,6 +36,7 @@
 
     map.on('draw:created', function(e) {
       featureGroup.addLayer(e.layer);
+      console.log(e.layerType)
       var data = featureGroup.toGeoJSON();
       data = data.features[data.features.length-1];      
       
