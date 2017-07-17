@@ -24,3 +24,7 @@ https://www.w3schools.com/colors/colors_names.asp
 
 #method
 pointLayer.getGeoJSON(); // แปลง feature เป็น GeoJSON
+
+## javascript ##
+string = JSON.stringify(object)
+object = JSON.parse[string]

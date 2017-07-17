@@ -17,6 +17,7 @@
 </head>
 <body>
   <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
   <div id='map'></div>
 
   <script>
@@ -37,18 +38,29 @@
     map.on('draw:created', function(e) {
       featureGroup.addLayer(e.layer);
       console.log(e.layerType)
+
       if(e.layerType === 'polyline') return;
-       if(e.layerType === 'marker') return;
+      if(e.layerType === 'marker') return;
 
       var data = featureGroup.toGeoJSON();
-      data = data.features[data.features.length-1];      
+      data = data.features[data.features.length-1]; 
+
+      if(e.layerType === 'circle') {
+        var radius = e.layer.getRadius();
+        data.properties['shape']= 'circle';
+        data.properties['radius']= radius;
+
+        var data = turf.circle([data.geometry.coordinates[1],data.geometry.coordinates[0]], radius/1000, 100);
+      };
       
-     
+      console.log(data)
+         
+           
      
       $.ajax({
         type: 'POST',
         url: 'http://localhost:3000/json',
-        data: JSON.stringify(data),
+        data: JSON.stringify(data),//แปลง objeact เป
         contentType: "application/json; charset=utf-8",
         dataType: "json"
       }).done(function(data){

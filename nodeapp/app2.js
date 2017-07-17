@@ -11,7 +11,7 @@ app.use(cors())
 app.use(express.static('html'))
 
 bodyParser = require('body-parser'),
-app.use(bodyParser.urlencoded());
+//app.use(bodyParser.urlencoded());
 
 
 /**bodyParser.json(options)
@@ -128,9 +128,9 @@ app.use(bodyParser.urlencoded());
 
  app.post('/json',function(req,res){
  	var data = req.body;
- 	console.log(data);
+ 	console.log(data.properties);
 
- 	var data = turf.centroid(data);
+ 	var data = turf.explode(data);
 
  	res.json(data);
  })
