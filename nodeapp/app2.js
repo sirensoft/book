@@ -5,7 +5,7 @@ var mysql = require('mysql');
 
 var app = express()
 app.use(cors())
-//app.use(morgan())
+app.use(morgan())
 
 app.use(express.static('html'))
 
