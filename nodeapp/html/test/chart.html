@@ -1,108 +1,97 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset=utf-8 />
-<title>chart</title>
-<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-<script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
-<link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
+  <meta charset=utf-8 />
+  <title>chart</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
+  <link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
 
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<style>
-  body { margin:0; padding:0; }
-  #map { position:absolute; top:0; bottom:0; width:100%; }
-</style>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+
+  <style>
+    body { margin:0; padding:0; }
+    #map { position:absolute; top:0; bottom:0; width:100%; }
+  </style>
 </head>
 <body>
-<div id='map'></div>
+  <div id='map'></div>
 
 
 
 
-<script>
-  L.mapbox.accessToken = 'pk.eyJ1IjoidGVobm5uIiwiYSI6ImNpZzF4bHV4NDE0dTZ1M200YWxweHR0ZzcifQ.lpRRelYpT0ucv1NN08KUWQ';
-  var map = L.mapbox.map('map', 'mapbox.streets');
-  map.setView([16.00,100.00],6);
-  
-  var popup = '<div id="container" style="min-width: 360px; height: 300px;">Loading...</div>';
+  <script>
+    L.mapbox.accessToken = 'pk.eyJ1IjoidGVobm5uIiwiYSI6ImNpZzF4bHV4NDE0dTZ1M200YWxweHR0ZzcifQ.lpRRelYpT0ucv1NN08KUWQ';
+    var map = L.mapbox.map('map', 'mapbox.streets');
+    map.setView([16.00,100.00],6);
 
-  var pol = L.mapbox.featureLayer().loadURL('./plk_amp.json').addTo(map);
-  pol.on('ready',function(){
+    var popup = '<div id="container" style="min-width: 360px; height: 300px;">Loading...</div>';
+
+    var pol = L.mapbox.featureLayer().loadURL('./plk_amp.json').addTo(map);
+    pol.on('ready',function(){
       pol.eachLayer(function(layer){
-          if(layer.feature.properties.AMP_CODE%3 == 0){
-            layer.setStyle({fillColor:'red',dashArray:3});          
-            
-          }else if(layer.feature.properties.AMP_CODE%2 == 0){
-            layer.setStyle({fillColor:'yellow',dashArray:3});            
-          }else{
-            layer.setStyle({fillColor:'limegreen',dashArray:3});
-          }
-          layer.bindPopup(popup,{maxWidth:'auto'});
-          layer.on('popupopen',function(){
-              popupopen(layer.feature.properties.AMP_NAMT)
-          });
+        if(layer.feature.properties.AMP_CODE%3 == 0){
+          layer.setStyle({fillColor:'red',dashArray:3});          
+
+        }else if(layer.feature.properties.AMP_CODE%2 == 0){
+          layer.setStyle({fillColor:'yellow',dashArray:3});            
+        }else{
+          layer.setStyle({fillColor:'limegreen',dashArray:3});
+        }
+        layer.bindPopup(popup,{maxWidth:'auto'});
+        layer.on('popupopen',function(){
+          popupopen(layer.feature.properties.AMP_CODE)
+        });
+        layer.on('popupclose',function(e){
+          //$('#container').html("Loading...");
+        });
 
       });
-  });
+    });
 
- 
 
-var popupopen = function(amp){
-   
-    $('#container').highcharts( {    
-    title: {
-        text: 'แนวโน้มอัตราป่วยด้วยโรคที่มิยุงเป็นพาหะ'
-    },
-    subtitle: {
-        text: amp
-    },
 
-    yAxis: {
+    var popupopen = function(amp){
+
+     $.ajax({
+      url: "http://localhost:3000/chart/"+amp,
+      type: "GET",           
+    }).done(function(data) {
+
+      $('#container').highcharts( {    
         title: {
+          text: 'แนวโน้มอัตราป่วยด้วยโรคที่มิยุงเป็นพาหะ'
+        },
+        subtitle: {
+          text: amp
+        },
+
+        yAxis: {
+          title: {
             text: 'อัตราต่อแสน'
-        }
-    },
-    legend: {
-        layout: 'vertical',
+          }
+        },
+        legend: {
+          layout: 'vertical',
         //align: 'right',
-      verticalAlign: 'middle'
-    },
+        verticalAlign: 'middle'
+      },
 
-    plotOptions: {
+      plotOptions: {
         series: {
-            pointStart: 2014
+          pointStart: 2014
         }
-    },
+      },
+      series: data
+    })
+    })
 
-    series: [{
-        name: 'DHF',
-        data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
-    }, {
-        name: 'DF',
-        data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
-    }, {
-        name: 'DSS',
-        data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
-    }, {
-        name: 'Zika',
-        data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
-    }]
-
-  })
-};
-
- 
-
-
-  marker.on('popupclose',function(e){  
-
-     //$('#container').html("Loading...");
-  });
+  };
 
 
 
-</script>
+
+ </script>
 </body>
 </html>
