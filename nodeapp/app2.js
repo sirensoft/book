@@ -127,12 +127,36 @@ bodyParser = require('body-parser'),
  });
 
  app.post('/json',function(req,res){
- 	var data = req.body;
- 	console.log(data.properties);
+ 	var polygon = turf.featureCollection([req.body]);
+ 	
+ 	var points =  {
+ 		"type": "FeatureCollection",
+ 		"name": "house",
+ 		"features":[]
+ 	};
 
- 	var data = turf.explode(data);
+ 	connection.query("SELECT id,title,coordinates FROM point", function (err, result, fields) {
+ 		if (err) throw err;
+ 		result.forEach(function(row){
+ 			points.features.push({ 
+ 				"type": "Feature", 
+ 				"properties": { 
+ 					"title":row.title,
+ 					"marker-symbol":"warehouse",
+ 					"marker-color":"#A52A2A",
+ 					"marker-size":"large"
+ 				}, 
+ 				"geometry": { "type": "Point", "coordinates": JSON.parse(row.coordinates) } 
+ 			})
+		});//end Loop
 
- 	res.json(data);
+		var data = turf.within(points, polygon);
+
+ 		res.json(data);
+ 		
+ 	});
+
+ 	
  })
 
 /// end
