@@ -23,6 +23,8 @@
 	<script src="https://unpkg.com/leaflet.measurecontrol@1.0.0"></script>
 	<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-hash/v0.2.1/leaflet-hash.js'></script>
 
+
+
 	<div id='map'></div>
 	<script>
 		L.mapbox.accessToken = 'pk.eyJ1IjoidGVobm5uIiwiYSI6ImNpZzF4bHV4NDE0dTZ1M200YWxweHR0ZzcifQ.lpRRelYpT0ucv1NN08KUWQ';
@@ -55,10 +57,13 @@
 			pointLayer.eachLayer(function(layer){
           		var coords = layer.feature.geometry.coordinates;
           		L.marker([coords[1],coords[0]], 
-          			{icon:L.divIcon({className:'point-label', html:layer.feature.properties.title})}
-          		).addTo(labelLayer)
+          		    {icon:L.divIcon({className:'point-label', html:layer.feature.properties.title})}
+          		)
+          		.addTo(labelLayer)
        		 });
+
 			
+			var style = [{fillColor:'red',fillOpacity:0.6},{fillColor:'lime',fillOpacity:0.6},{fillColor:'blue',fillOpacity:0.6}];
 			var circle ;
 			marker.on('dragend',function(e){
 				//var marker = e.target;
@@ -68,7 +73,9 @@
 				var point = {"type": "Feature", "geometry": { "type": "Point", "coordinates":[] } };
 				point.geometry.coordinates[0]=drop.lng;
 				point.geometry.coordinates[1]=drop.lat;
-				circle =L.circle([drop.lat,drop.lng],100);
+				var randomnumber = Math.floor(Math.random() * (2 - 0 + 1)) + 0;
+				console.log(randomnumber)
+				circle =L.circle([drop.lat,drop.lng],100).setStyle(style[randomnumber]);
 				map.addLayer(circle);
 				//console.log(circle);
 				
