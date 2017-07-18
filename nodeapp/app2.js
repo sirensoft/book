@@ -144,7 +144,7 @@ bodyParser = require('body-parser'),
  					"title":row.title,
  					"marker-symbol":row.dis==1?"disability":"warehouse",
  					"marker-color":row.dis==1?"#B22222":"#7CFC00",
- 					"marker-size":"large"
+ 					"marker-size":row.dis==1?"large":"medium"
  				}, 
  				"geometry": { "type": "Point", "coordinates": JSON.parse(row.coordinates) } 
  			})
