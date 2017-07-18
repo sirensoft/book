@@ -47,7 +47,7 @@
     map.on('draw:created', function(e) {
       featureGroup.addLayer(e.layer);
       console.log(e.layerType)
-
+   
       if(e.layerType === 'polyline') return;
       if(e.layerType === 'marker') return;
 
