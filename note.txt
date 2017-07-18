@@ -28,3 +28,7 @@ pointLayer.getGeoJSON(); // แปลง feature เป็น GeoJSON
 ## javascript ##
 string = JSON.stringify(object)
 object = JSON.parse[string]
+
+#nodejs
+npm cache clean
+npm update -g

@@ -3,6 +3,10 @@ var cors = require('cors')
 var morgan = require('morgan')
 var mysql = require('mysql');
 var turf = require('@turf/turf');
+var md5 = require("./md5.min");
+
+
+console.log(md5('aaaaa'))
 
 var app = express()
 app.use(cors())
